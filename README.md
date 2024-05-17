@@ -52,7 +52,7 @@ Shows the Tasks List
 
 
 ## Link of Deployed Application
- Link: [`Jean de Dieu Blog`](https://jahdona.github.io/Jean-de-dieu-blog/)
+ Link: [`Kanban Task Board`](https://jahdona.github.io/Kanban-task-board/)
 
 ## Credits
 
