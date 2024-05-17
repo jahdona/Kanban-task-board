@@ -75,6 +75,7 @@ function createTaskCard() {
 
 }
 
+
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
 
@@ -118,17 +119,17 @@ event.parentElement.parentElement.remove();
     localStorage.setItem('formData',JSON.stringify(data));
 }
 function readProjectsFromStorage() {
-    // ? Retrieve projects from localStorage and parse the JSON to an array.
+    
     // ? We use `let` here because there is a chance that there are no projects in localStorage (which means the projects variable will be equal to `null`) and we will need it to be initialized to an empty array.
-    let projects = JSON.parse(localStorage.getItem('projects'));
+    data=JSON.parse(localStorage.getItem('formData'));
   
     // ? If no projects were retrieved from localStorage, assign projects to a new empty array to push to later.
-    if (!projects) {
-      projects = [];
+    if (!data) {
+      data = [];
     }
   
     // ? Return the projects array either empty or with data in it whichever it was determined to be by the logic right above.
-    return projects;
+    return data;
   }
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
@@ -147,7 +148,7 @@ function handleDrop(event, ui) {
     }
   }
   // ? Save the updated projects array to localStorage (overwritting the previous one) and render the new project data to the screen.
-  localStorage.setItem('projects', JSON.stringify(projects));
+  localStorage.setItem('formData', JSON.stringify(projects));
   printProjectData();
 }
 
