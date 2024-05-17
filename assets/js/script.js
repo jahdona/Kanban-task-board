@@ -18,6 +18,7 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+   
     tasks.innerHTML +=`
 
     <div>
@@ -48,6 +49,7 @@ function handleAddTask(event){
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+    
 
 event.parentElement.parentElement.remove();
     data.splice(event.parentElement.parentElement.id,1);
@@ -76,12 +78,13 @@ form.addEventListener('submit',(e)=>{
 let formValidation=()=>{
     const taskInput=textInput.value;
     const dateI=dateInput.value;
-    if(taskInput===''||dateI==='')
-{
+    const status=textarea.value.toLowerCase();
+    if(taskInput===''||dateI===''){
     
    
    mes.innerHTML='Task title or task date should not be empty';
 }
+
 else{
     
     mes.innerHTML='';
@@ -111,15 +114,34 @@ let data= [];
     
 
  }
- tasks.innerHTML='';
+ 
  let createTask=()=>{
+    tasks.innerHTML='';
     data.map((x,y)=>{
+        if(x.textarea.toLowerCase()==='due to day')
+        {
+            
         return(tasks.innerHTML +=`
 
-        <div id=${y}>
-                    <span class="fw-bold">${x.tName}</span>
-                    <span class="small text-secondary">${x.dateInput}</span>
-                    <p>${x.textarea} </p> 
+        <div id=${y} style='background-color:yellow;' class='draggable'>
+                         <span class="fw-bold">Task Title :  ${x.tName}</span>
+                     <span class="">Due Date    : ${x.dateInput}</span>
+                         <p>Task Status : ${x.textarea} </p> 
+                    <span class="option">
+                         <i onClick="editTask(this)" data-bs-toggle="modal" 
+                         data-bs-target="#formModal" class="fa-solid fa-pen-to-square"></i>
+                         <i onClick="deleteTask(this)" class="fa-solid fa-trash"></i>
+                     </span>
+                </div>
+        `);}
+        else if(x.textarea.toLowerCase()==='past due'){
+            
+            return(tasks.innerHTML +=`
+
+        <div id=${y} style='background-color:red;color:white' class='draggable'>
+                    <span class="fw-bold">Task Title :  ${x.tName}</span>
+                    <span class="">Due Date    : ${x.dateInput}</span>
+                    <p>Task Status : ${x.textarea} </p> 
                     <span class="option">
                          <i onClick="editTask(this)" data-bs-toggle="modal" 
                          data-bs-target="#formModal" class="fa-solid fa-pen-to-square"></i>
@@ -127,6 +149,24 @@ let data= [];
                      </span>
                 </div>
         `);
+
+        }
+        else{
+            
+            return(tasks.innerHTML +=`
+
+        <div id=${y} class='draggable'>
+                    <span class="fw-bold">Task Title :  ${x.tName}</span>
+                    <span class="">Due Date    : ${x.dateInput}</span>
+                    <p>Task Status : ${x.textarea} </p> 
+                                <span class="option">
+                         <i onClick="editTask(this)" data-bs-toggle="modal" 
+                         data-bs-target="#formModal" class="fa-solid fa-pen-to-square"></i>
+                         <i onClick="deleteTask(this)" class="fa-solid fa-trash"></i>
+                     </span>
+                </div>
+        `);
+        }
 
     })
     
@@ -157,7 +197,52 @@ let data= [];
     mes.textContent='';
  }
  close.addEventListener('click',clearMessage);
+
+
  (()=>{
     data=JSON.parse(localStorage.getItem('formData'));
     createTask();
  })();
+
+
+ $(function () {
+    $('#dateInput').datepicker({
+      changeMonth: true,
+      changeYear: true,
+    });
+  });
+  $( function() {
+    $( ".draggable" ).draggable();
+  } );
+/*
+  $( function() {
+    $( "#droppable" ).droppable();
+    $( ".draggable" ).draggable();
+    $( "#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+  } );*/
+  $( function() {
+    $( ".draggable, #draggable-nonvalid" ).draggable();
+    $( ".draggable","#in-progress" ).droppable({
+      accept: ".draggable",
+      classes: {
+        "ui-droppable-active": "ui-state-active",
+        "ui-droppable-hover": "ui-state-hover"
+      },
+      drop: function( event, ui ) {
+        var draggable = ui.draggable;
+        var offset = draggable.offset();
+        draggable.appendTo( this ).offset( offset );
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+  } );
