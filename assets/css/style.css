@@ -33,6 +33,7 @@ body {
   
 }
 .todo div{
+  
   background-color: #e2eede;
   border: 3px solid #abcea1;
   padding: 5px;
@@ -70,4 +71,10 @@ body {
 }
 #msg{
   color: red;
+}
+#deletButton{
+  width: 10px;
+}
+.draggable{
+  z-index: 100;
 }

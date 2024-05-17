@@ -46,8 +46,8 @@ The following images show the web application's appearance and functionality:
 Shows the blog input in dark mode
 ![Shows the task board form modal.](./assets/images/addTask.png)
 
-Shows the blog input in light mode
-![Display the task lists from local storage.](./assets/images/lightForm.png)
+Shows the Tasks List 
+![Display the task lists from local storage.](./assets/images/Displays.png)
 
 
 
