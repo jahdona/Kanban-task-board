@@ -16,16 +16,16 @@
 </head>
 
 <body>
-  <header class="p-4 mb-4 text-center border-bottom border-5">
+  <header class="p-4 mb-4 text-center border-bottom border-5" id="task-head">
     <h1 class="display-3">Task Board</h1>
     <p class="lead">A simple Kanban board for task management</p>
   </header>
   <div class="container">
     <div class="text-center mb-5">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#task-form">Add Task</button>
     </div>
     <!-- Todo: Create a modal with a form to add tasks -->
-    <form class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form class="modal fade" id="task-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -33,17 +33,17 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-           <label for="texInput"> Task Title</label> 
-            <input type="text" name="title" id="texInput" class="form-control" autocomplete='off'><br>
+           <label for="text-input"> Task Title</label> 
+            <input type="text" name="title" id="text-input" class="form-control" autocomplete='off'><br>
             <div id="msg"></div>
-            <label for="dateInput">Due Date</label> 
-            <input type="text" name="" id="dateInput" class="form-control" autocomplete='off'><br>
-            <label for="textArea">Description</label> <br>
-            <textarea name="" id="textArea" cols="30" rows="10" class="descrpt"></textarea>
+            <label for="date-input">Due Date</label> 
+            <input type="text" name="" id="date-input" class="form-control" autocomplete='off'><br>
+            <label for="text-area">Description</label> <br>
+            <textarea name="" id="text-area" cols="30" rows="10" class="descrpt"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button id="but" type="submit" class="btn btn-primary">Add Task</button>
+            <button id="add-btn" type="submit" class="btn btn-primary">Add Task</button>
           </div>
         </div>
       </div>
@@ -56,10 +56,7 @@
             <h2 class="card-title mb-1">To Do</h2>
           </div>
           <div class="card-body bg-light" id="taskBoard">
-            <div id="todo-cards" class="todo"> 
-              
-               
-            </div>
+            <div id="todo-cards" class="todo"></div>
           </div>
         </div>
       </div>
