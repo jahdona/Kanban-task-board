@@ -1,13 +1,11 @@
-  //const taskName=document.getElementById('text-input');
+  
   const taskName=$('#text-input');
   const taskDesc =$('#text-area');
   const taskDate = $('#date-input');
   const taskFormEl=$('#task-form');
   const msgDivEl=$('#msg')
   const addButon=$('#add-btn');
-// Retrieve tasks and nextId from localStorage
-//let taskList = JSON.parse(localStorage.getItem("tasks"));
-let nextId = JSON.parse(localStorage.getItem("nextId"));
+
 
 // Todo: create a function to generate a unique task id
 function generateTask() {
@@ -18,7 +16,7 @@ function generateTask() {
     tasks = [];
   }
 
-  // ? Return the tasks array either empty or with data in it whichever it was determined to be by the logic right above.
+  // ? Return the tasks array either empty or with data in it.
   return tasks;
 }
 function saveTasksToStorage(tasks) {
@@ -94,13 +92,13 @@ function renderTaskList() {
   $('.draggable').draggable({
     opacity: 0.7,
     zIndex: 100,
-    // ? This is the function that creates the clone of the card that is dragged. This is purely visual and does not affect the data.
+    // ? This is the function that creates the clone of the card that is dragged.
     helper: function (e) {
-      // ? Check if the target of the drag event is the card itself or a child element. If it is the card itself, clone it, otherwise find the parent card  that is draggable and clone that.
-      const original = $(e.target).hasClass('ui-draggable')
+      // ? Check if the target of the drag event is the card itself or a child element.
+         const original = $(e.target).hasClass('ui-draggable')
         ? $(e.target)
         : $(e.target).closest('.ui-draggable');
-      // ? Return the clone with the width set to the width of the original card. This is so the clone does not take up the entire width of the lane. This is to also fix a visual bug where the card shrinks as it's dragged to the right.
+      // ? Return the clone with the width set to the width of the original card.
       return original.clone().css({
         width: original.outerWidth(),
       });
@@ -124,7 +122,7 @@ else{
 
 
   const newtask = {
-    // ? Here we use a Web API called `crypto` to generate a random id for our task. This is a unique identifier that we can use to find the task in the array. `crypto` is a built-in module that we can use in the browser and Nodejs.
+    // ? Here we use a Web API called `crypto` to generate a random id for our task. 
     id: crypto.randomUUID(),
     name: taskNames,
     descript: taskDescr,

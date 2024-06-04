@@ -43,11 +43,10 @@ THEN the saved tasks persist
 
 The following images show the web application's appearance and functionality:
 
-Shows the blog input in dark mode
-![Shows the task board form modal.](./assets/images/addTask.png)
+
 
 Shows the Tasks List 
-![Display the task lists from local storage.](./assets/images/Displays.png)
+![Display the task lists from local storage.](./assets/images/tasks.png)
 
 
 
