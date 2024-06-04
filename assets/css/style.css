@@ -93,3 +93,6 @@ background: var(--red);
   width: 100%;
   height: 70px;
 }
+#msg{
+  color: var(--red);
+}

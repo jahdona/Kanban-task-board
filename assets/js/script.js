@@ -3,7 +3,8 @@
   const taskDesc =$('#text-area');
   const taskDate = $('#date-input');
   const taskFormEl=$('#task-form');
-
+  const msgDivEl=$('#msg')
+  const addButon=$('#add-btn');
 // Retrieve tasks and nextId from localStorage
 //let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
@@ -26,6 +27,7 @@ function saveTasksToStorage(tasks) {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+  console.log(task.id);
   const taskCard = $('<div>')
     .addClass('card task-card draggable my-3')
     .attr('data-task-id', task.id);
@@ -78,6 +80,7 @@ function renderTaskList() {
 
   // ? Loop through tasks and create task cards for each status
   for (let task of tasks) {
+    console.log(task);
     if (task.status === 'to-do') {
       todoList.append(createTaskCard(task));
     } else if (task.status === 'in-progress') {
@@ -114,9 +117,15 @@ function handleAddTask(event){
   const taskNames = taskName.val().trim();
   const taskDescr = taskDesc.val()// don't need to trim select input
   const taskDates = taskDate.val(); // yyyy-mm-dd format
+if(!taskNames||!taskDescr||!taskDates){
+  msgDivEl.text("Task title or task date should not be empty");
+}
+else{
+
 
   const newtask = {
-    // ? Here we use a Web API called `crypto` to generate a random id for our task. This is a unique identifier that we can use to find the task in the array. `crypto` is a built-in module that we can use in the browser and Nodejs.    id: crypto.randomUUID(),
+    // ? Here we use a Web API called `crypto` to generate a random id for our task. This is a unique identifier that we can use to find the task in the array. `crypto` is a built-in module that we can use in the browser and Nodejs.
+    id: crypto.randomUUID(),
     name: taskNames,
     descript: taskDescr,
     dueDate: taskDates,
@@ -138,14 +147,16 @@ function handleAddTask(event){
   taskDesc.val('');
   taskDate.val('');
 }
+}
 
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
   const taskId = $(this).attr('data-task-id');
+  console.log(taskId);
   const tasks = generateTask();
 
-  // ? Remove task from the array. There is a method called `filter()` for this that is better suited which we will go over in a later activity. For now, we will use a `forEach()` loop to remove the task.
+  // ? Remove task from the array. 
   tasks.forEach((task) => {
     if (task.id === taskId) {
       tasks.splice(tasks.indexOf(task), 1);
